@@ -1,30 +1,39 @@
 import * as React from 'react';
-import { mergeClassNames } from '../../../../utils/merge-class-names/merge-class-names';
+import { mergeClassNames } from './utils/merge-class-names/merge-class-names';
 import * as componentStyles from './component.css';
 
 interface IComponentProps {
   isComponentChildVisible: boolean;
-  someOptionalProp?: void;
+  someRequiredlProp: void;
+  someOptionalProp?: any;
 }
 
 interface IComponentState {
   isComponentChildSomeKind: boolean;
+  something: boolean;
 }
 
 export class Component extends React.Component<IComponentProps, IComponentState> {
 
   public props = {
     isComponentChildVisible: true,
-    someOptionalProp: () => {},
+    someRequiredlProp: () => {},
+    someOptionalProp: {},
   }
 
   public state = {
     isComponentChildSomeKind: false,
+    something: true,
+  }
+
+  public componentDidMount() {
+    this.setState({ something: this.props.someRequiredlProp });
   }
 
   public render() {
     const {
       isComponentChildVisible,
+      someRequiredlProp,
       someOptionalProp,
     } = this.props;
 
